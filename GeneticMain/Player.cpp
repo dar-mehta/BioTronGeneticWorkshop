@@ -26,31 +26,49 @@ Player* Player::copy() {
 //  Returns a copy of current player
 //  with minor random differences.
 Player* Player::mutate() {
-	Player* p = new Player();
-	p->a = this->a.add(randomMatrix(9, 18)).scale(0.5);
-	p->b = this->b.add(randomMatrix(9, 18)).scale(0.5);
-	p->c = this->c.add(randomMatrix(9, 18)).scale(0.5);
-	p->d = this->d.add(randomMatrix(18, 9)).scale(0.5);	
-	p->e = this->e.add(randomMatrix(18, 9)).scale(0.5);
-	p->f = this->f.add(randomMatrix(18, 9)).scale(0.5);	
-	p->g = this->g.add(randomMatrix(1, 9)).scale(0.5);
-	return p;
+    Player* p = new Player();
+    p->a = this->a.add(randomMatrix(9, 18));
+    p->b = this->b.add(randomMatrix(9, 18));
+    p->c = this->c.add(randomMatrix(9, 18));
+    p->d = this->d.add(randomMatrix(18, 9));
+    p->e = this->e.add(randomMatrix(18, 9));
+    p->f = this->f.add(randomMatrix(18, 9));
+    p->g = this->g.add(randomMatrix(1, 9));
+    return p;
 }
 
 //  Returns a new player whose data
 //	structure mixes the data from p2 and
 //  the current player
 Player* Player::mate(Player* other) {
-	Player* p = new Player();
-	p->a = this->a.add(other->a).scale(0.5);
-	p->b = this->b.add(other->b).scale(0.5);
-	p->c = this->c.add(other->c).scale(0.5);
-	p->d = this->d.add(other->d).scale(0.5);
-	p->e = this->e.add(other->e).scale(0.5);
-	p->f = this->f.add(other->f).scale(0.5);
-	p->g = this->g.add(other->g).scale(0.5);
-	
-	return p;
+    Player* p = new Player();
+    switch(rand()%3) {
+        case 0:
+            p->a = this->a;
+            p->b = this->b;
+            p->c = this->c;
+            p->d = this->d;
+            p->e = this->e;
+            p->f = this->f;
+            p->g = this->g;
+        case 1:
+            p->a = other->a;
+            p->b = other->b;
+            p->c = other->c;
+            p->d = other->d;
+            p->e = other->e;
+            p->f = other->f;
+            p->g = other->g;
+        case 2:
+            p->a = this->a.add(other->a);
+            p->b = this->b.add(other->b);
+            p->c = this->c.add(other->c);
+            p->d = this->d.add(other->d);
+            p->e = this->e.add(other->e);
+            p->f = this->f.add(other->f);
+            p->g = this->g.add(other->g);
+    }
+    return p;
 }
 
 //	Returns a player with entirely randomized data
